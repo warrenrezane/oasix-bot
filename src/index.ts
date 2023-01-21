@@ -35,7 +35,9 @@ export const client = new Client({
     database: process.env.DB_NAME,
   });
 
-  await mysql.connect();
+  await mysql
+    .connect()
+    .catch((error) => console.log("[MySQL Database] Failed to connect to DB."));
 
   console.log("[MySQL Database] Connected to DB!\n");
 

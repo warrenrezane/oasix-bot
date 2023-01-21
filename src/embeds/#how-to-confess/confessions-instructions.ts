@@ -11,7 +11,7 @@ export const ConfessionsInstructionsEmbed: Embed = {
         iconURL:
           "https://media.discordapp.net/attachments/1057743418954088519/1057743581915402340/OASIX_white_badge_-_norm.gif",
       })
-      .setTitle("Confession Instructions")
+      .setTitle("Confessions Instructions")
       .setDescription(
         `
         __**TO CREATE A CONFESSION**__
