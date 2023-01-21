@@ -3,9 +3,7 @@ import { Client, Partials, GatewayIntentBits } from "discord.js";
 import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
-import { QuickDB } from "quick.db";
-
-const db = new QuickDB({ filePath: "./database/oasix.sqlite" });
+import { MySQLDriver, QuickDB } from "quick.db";
 
 export const client = new Client({
   intents: [
@@ -27,20 +25,39 @@ export const client = new Client({
   ],
 });
 
-ready(client, db);
-interactionCreate(client, db);
-messageCreate(client, db);
+(async (client) => {
+  console.log("[MySQL Database] Connecting to DB....");
 
-const AuthenticationToken = process.env.TOKEN as string;
-if (!AuthenticationToken) {
-  console.warn(
-    "[CRASH] Authentication Token for Discord bot is required! Use Environment Secrets."
-  );
-  process.exit();
-}
+  const mysql = new MySQLDriver({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+  });
 
-client.login(AuthenticationToken).catch((err) => {
-  console.error("[CRASH] Something went wrong while connecting to your bot...");
-  console.error("[CRASH] Error from Discord API:" + err);
-  return process.exit();
-});
+  await mysql.connect();
+
+  console.log("[MySQL Database] Connected to DB!\n");
+
+  const db = new QuickDB({ driver: mysql });
+
+  ready(client, db);
+  interactionCreate(client, db);
+  messageCreate(client, db);
+
+  const AuthenticationToken = process.env.TOKEN as string;
+  if (!AuthenticationToken) {
+    console.warn(
+      "[CRASH] Authentication Token for Discord bot is required! Use Environment Secrets.\n"
+    );
+    process.exit();
+  }
+
+  client.login(AuthenticationToken).catch((err) => {
+    console.error(
+      "[CRASH] Something went wrong while connecting to your bot...\n"
+    );
+    console.error("[CRASH] Error from Discord API:" + err);
+    return process.exit();
+  });
+})(client);
