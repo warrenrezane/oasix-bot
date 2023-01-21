@@ -61,3 +61,8 @@ export const client = new Client({
     return process.exit();
   });
 })(client);
+
+process.on("unhandledRejection", async (err, promise) => {
+  console.error(`[ANTI-CRASH] Unhandled Rejection: ${err}`);
+  console.error(promise);
+});
