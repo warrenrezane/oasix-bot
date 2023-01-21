@@ -30,6 +30,21 @@ export const ConfessionsBan: PrefixCommand = {
       });
     }
 
+    client.guilds.cache
+      .get(process.env.GUILD_ID as string)
+      ?.members.fetch(user_id)
+      .catch(async (err) => {
+        await message.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setColor("Red")
+              .setTitle("Error!")
+              .setDescription("This user is not a member of this server.")
+              .setTimestamp(),
+          ],
+        });
+      });
+
     const confessions_banned_ids = db.table("confessions_banned_ids");
 
     // Check if user has already existed in the banned list.
@@ -48,6 +63,23 @@ export const ConfessionsBan: PrefixCommand = {
     }
 
     await confessions_banned_ids.set(user_id, { user_id });
+
+    const banned_user = client.guilds.cache
+      .get(process.env.GUILD_ID as string)
+      ?.members.cache.get(user_id);
+
+    if (typeof banned_user === "undefined") return; // There should be a message here.
+
+    banned_user!.send({
+      embeds: [
+        new EmbedBuilder()
+          .setColor("Red")
+          .setTitle("Confessions Banned!")
+          .setDescription(
+            "You've been banned for using the confession commands. Please contact the staff to process your appeal."
+          ),
+      ],
+    });
 
     return await message.reply({
       embeds: [

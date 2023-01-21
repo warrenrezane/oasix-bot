@@ -33,15 +33,7 @@ export default (client: Client, db: QuickDB): void => {
             )
           )
         ) {
-          await message.reply({
-            embeds: [
-              new EmbedBuilder()
-                .setDescription(
-                  `🚫 Unfortunately, you are not authorized to use this command.`
-                )
-                .setColor("Red"),
-            ],
-          });
+          return;
         }
       }
 

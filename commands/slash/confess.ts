@@ -10,7 +10,6 @@ import {
   CommandInteractionOptionResolver,
   CommandInteraction,
   Message,
-  ActionRowBuilder,
 } from "discord.js";
 import { QuickDB } from "quick.db";
 import { SlashCommand } from "../../interfaces/SlashCommand";
@@ -271,7 +270,7 @@ export const Confess: SlashCommand = {
         break;
     }
 
-    await interaction.reply({
+    return await interaction.reply({
       embeds: [
         new EmbedBuilder()
           .setColor("Green")
@@ -300,9 +299,7 @@ const confessionEmbedMessage = (count: number, confession: string | null) => {
       .setTitle(`Confession #${count + 1}`)
       .setDescription(`${confession}`)
       .setColor("Random")
-      .setFooter({
-        text: "Use /confess submit <Confession> to confess something to this channel!",
-      }),
+      .setTimestamp(),
   ];
 };
 
