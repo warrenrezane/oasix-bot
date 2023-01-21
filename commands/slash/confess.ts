@@ -366,7 +366,7 @@ const announceToConfessionLogsChannel = async (
   ).send({
     embeds: [
       new EmbedBuilder()
-        .setTitle(`Anonymous Confession #${count + 1}`)
+        .setTitle(`Anonymous Confession (#${count + 1})`)
         .setDescription(`"${confession}"`)
         .addFields(
           {
