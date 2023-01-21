@@ -6,14 +6,14 @@ export default (client: Client, db: QuickDB): void => {
   client.on("ready", async () => {
     if (!client.user || !client.application) return;
 
-    await client.application.commands.set(Commands);
-
     Commands.forEach((command) => {
       console.log(
         `[Command: ${command.name}] has been loaded, and is ready to use.`
       );
     });
 
-    console.log(`${client.user.username} is online!`);
+    await client.application.commands.set(Commands);
+
+    console.log(`\n${client.user.tag} is online!`);
   });
 };
