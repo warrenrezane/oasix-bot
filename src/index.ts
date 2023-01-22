@@ -4,7 +4,6 @@ import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
 import { MySQLDriver, QuickDB } from "quick.db";
-import http from "http";
 
 export const client = new Client({
   intents: [
@@ -25,13 +24,6 @@ export const client = new Client({
     Partials.User,
   ],
 });
-
-http
-  .createServer(function (req, res) {
-    res.write("I'm alive");
-    res.end();
-  })
-  .listen(8080);
 
 (async (client) => {
   console.log("[MySQL Database] Connecting to DB....");
