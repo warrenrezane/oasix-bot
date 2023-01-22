@@ -394,7 +394,9 @@ const announceToConfessionReportsChannel = async (
   return await (
     client.guilds.cache
       .get(process.env.GUILD_ID as string)
-      ?.channels.cache.get("1066288375222521876") as TextChannel
+      ?.channels.cache.get(
+        process.env.CONFESSION_REPORTS_CHANNEL_ID as string
+      ) as TextChannel
   ).send({
     embeds: [
       new EmbedBuilder()
