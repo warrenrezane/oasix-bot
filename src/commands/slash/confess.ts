@@ -83,8 +83,10 @@ export const Confess: SlashCommand = {
     const confessions_banned_ids = db.table("confessions_banned_ids");
     const banned_user = await confessions_banned_ids.get(interaction.user.id);
 
+    await interaction.deferReply();
+
     if (banned_user) {
-      return await interaction.reply({
+      return await interaction.editReply({
         embeds: [
           new EmbedBuilder()
             .setColor("Red")
@@ -94,7 +96,6 @@ export const Confess: SlashCommand = {
             )
             .setTimestamp(),
         ],
-        ephemeral: true,
       });
     }
 
@@ -140,7 +141,7 @@ export const Confess: SlashCommand = {
         } | null = await confessions.get(`${confessionMessageId}`);
 
         if (!confessionData) {
-          return await interaction.reply({
+          return await interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setColor("Red")
@@ -149,7 +150,6 @@ export const Confess: SlashCommand = {
                   `Sorry, the confession ID you entered doesn't exist.`
                 ),
             ],
-            ephemeral: true,
           });
         }
 
@@ -221,7 +221,7 @@ export const Confess: SlashCommand = {
         } | null = await confessions.get(`${reportedConfessionMessageId}`);
 
         if (!reportedConfessionData) {
-          return await interaction.reply({
+          return await interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setColor("Red")
@@ -230,12 +230,11 @@ export const Confess: SlashCommand = {
                   `Sorry, the confession ID you entered doesn't exist.`
                 ),
             ],
-            ephemeral: true,
           });
         }
 
         if (reportedConfessionData.user_id === interaction.user.id) {
-          return await interaction.reply({
+          return await interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setColor("Red")
@@ -244,7 +243,6 @@ export const Confess: SlashCommand = {
                   `You cannot report yourself. Why would you do that though? Krazy.`
                 ),
             ],
-            ephemeral: true,
           });
         }
 
@@ -255,7 +253,7 @@ export const Confess: SlashCommand = {
           reportedConfessionData
         );
 
-        return await interaction.reply({
+        return await interaction.editReply({
           embeds: [
             new EmbedBuilder()
               .setColor("Green")
@@ -270,7 +268,7 @@ export const Confess: SlashCommand = {
         break;
     }
 
-    return await interaction.reply({
+    return await interaction.editReply({
       embeds: [
         new EmbedBuilder()
           .setColor("Green")
@@ -288,7 +286,6 @@ export const Confess: SlashCommand = {
           ],
         },
       ],
-      ephemeral: true,
     });
   },
 };
