@@ -32,8 +32,10 @@ http
   })
   .listen(8080);
 
+const date = new Date();
+
 (async (client) => {
-  console.log("[MySQL Database] Connecting to DB....");
+  console.log(`[${date.toUTCString()}] [MySQL Database] Connecting to DB....`);
 
   const mysql = new MySQLDriver({
     host: process.env.DB_HOST,
@@ -42,11 +44,9 @@ http
     database: process.env.DB_NAME,
   });
 
-  await mysql
-    .connect()
-    .catch((error) => console.log("[MySQL Database] Failed to connect to DB."));
+  await mysql.connect();
 
-  console.log("[MySQL Database] Connected to DB!\n");
+  console.log(`[${date.toUTCString()}] [MySQL Database] Connected to DB!\n`);
 
   const db = new QuickDB({ driver: mysql });
 
@@ -57,21 +57,25 @@ http
   const AuthenticationToken = process.env.TOKEN as string;
   if (!AuthenticationToken) {
     console.warn(
-      "[CRASH] Authentication Token for Discord bot is required! Use Environment Secrets.\n"
+      `[${date.toUTCString()}] [CRASH] Authentication Token for Discord bot is required! Use Environment Secrets.\n`
     );
     process.exit();
   }
 
   client.login(AuthenticationToken).catch((err) => {
     console.error(
-      "[CRASH] Something went wrong while connecting to your bot...\n"
+      `[${date.toUTCString()}] [CRASH] Something went wrong while connecting to your bot...\n`
     );
-    console.error("[CRASH] Error from Discord API:" + err);
+    console.error(
+      `[${date.toUTCString()}] [CRASH] Error from Discord API: ${err}`
+    );
     return process.exit();
   });
 })(client);
 
 process.on("unhandledRejection", async (err, promise) => {
-  console.error(`[ANTI-CRASH] Unhandled Rejection: ${err}`);
-  console.error(promise);
+  console.error(
+    `[${date.toUTCString()}] [ANTI-CRASH] Unhandled Rejection: ${err}`
+  );
+  console.error(`[${date.toUTCString()}] ${promise}`);
 });
