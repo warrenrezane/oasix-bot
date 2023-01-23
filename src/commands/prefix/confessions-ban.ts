@@ -4,9 +4,7 @@ import { PrefixCommand } from "../../interfaces/PrefixCommand";
 export const ConfessionsBan: PrefixCommand = {
   name: "confessions-ban",
   commandDescription: "Ban the user from using command.",
-  usage:
-    (("```" + process.env.PREFIX) as string) +
-    " confessions-ban [The ID of the User to be banned]",
+  usage: `${(process.env.PREFIX as string) || "?"}confessions-ban [user_id]`,
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],
   run: async (client, message, db) => {

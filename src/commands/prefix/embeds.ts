@@ -4,6 +4,7 @@ import { PrefixCommand } from "../../interfaces/PrefixCommand";
 
 export const Embeds: PrefixCommand = {
   name: "embeds",
+  usage: `${(process.env.PREFIX as string) || "?"}embeds`,
   commandDescription: "Lists all of the available embeds.",
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],

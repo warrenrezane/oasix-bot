@@ -5,8 +5,12 @@ import { PrefixCommand } from "../../interfaces/PrefixCommand";
 export const Embed: PrefixCommand = {
   name: "embed",
   commandDescription: "Outputs an embed message to a specific channel.",
-  additionalInfo: "To get a list of embeds, use `?embeds`.",
-  usage: "```?embed [target_channel_id] [embed_name]```",
+  additionalInfo:
+    (("To get a list of embeds, use `" + process.env.PREFIX) as string) ||
+    "?" + "embeds`.",
+  usage: `${
+    (process.env.PREFIX as string) || "?"
+  }embed [channel_id] [embed_name]`,
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],
   run: async (client, message, db) => {
