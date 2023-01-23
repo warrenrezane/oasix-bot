@@ -8,7 +8,7 @@ export default (client: Client, db: QuickDB): void => {
 
     Commands.forEach((command) => {
       console.log(
-        `[Command: ${command.name}] has been loaded, and is ready to use.`
+        `[Command: ${command.name}] has been loaded, and is ready to use. \nUsage: ${command.usage}\n`
       );
     });
 
