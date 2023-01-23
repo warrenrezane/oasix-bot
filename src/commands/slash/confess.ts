@@ -18,7 +18,7 @@ export const Confess: SlashCommand = {
   name: "confess",
   description: "Submit or reply to a confession.",
   usage:
-    "```/confess submit [confession] or /confess reply [confession_id] [reply]```",
+    "/confess submit [confession] or /confess reply [confession_id] [reply] or /confess report [confession_id] [reason]",
   type: ApplicationCommandType.ChatInput,
   defaultMemberPermissions: ["SendMessages"],
   options: [
