@@ -26,12 +26,6 @@ export const client = new Client({
   ],
 });
 
-http
-  .createServer((request, response) => {
-    response.end();
-  })
-  .listen(8080);
-
 const date = new Date();
 
 (async (client) => {
