@@ -1,4 +1,4 @@
-run = "kill 1 && npm run start"
+run = "npm run start"
 hidden = [".build", ".config"]
 
 [packager]
