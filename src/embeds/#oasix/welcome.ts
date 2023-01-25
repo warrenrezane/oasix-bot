@@ -41,13 +41,13 @@ export const WelcomeEmbed: Embed = {
       type: ComponentType.ActionRow,
       components: [
         new ButtonBuilder()
-          .setCustomId("server-rules-embed")
+          .setCustomId("server-rules")
           .setLabel("Server Rules")
           .setStyle(ButtonStyle.Secondary)
           .setEmoji("1061922449245081630"),
 
         new ButtonBuilder()
-          .setCustomId("level-perks-embed")
+          .setCustomId("level-perks")
           .setLabel("Level Perks")
           .setStyle(ButtonStyle.Secondary)
           .setEmoji("1049863370330869843"),
