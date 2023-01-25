@@ -1,10 +1,14 @@
 import { EmbedsContainer } from "../containers/EmbedsContainer";
-import { Client, Interaction } from "discord.js";
+import { Client, CommandInteraction, Interaction } from "discord.js";
 import { SlashCommands } from "../containers/SlashCommands";
-import { QuickDB } from "quick.db";
+import { MySQLDriver, QuickDB } from "quick.db";
 
-export default (client: Client, db: QuickDB): void => {
+export default (client: Client, mysql: MySQLDriver): void => {
   client.on("interactionCreate", async (interaction: Interaction) => {
+    // Connect to MySQL
+    await mysql.connect();
+    const db = new QuickDB({ driver: mysql });
+
     if (interaction.isChatInputCommand()) {
       const slashCommand = SlashCommands.find(
         (command) => command.name === interaction.commandName

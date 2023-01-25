@@ -1,9 +1,13 @@
 import { PrefixCommands } from "../containers/PrefixCommands";
 import { Client, EmbedBuilder, Message, PermissionsBitField } from "discord.js";
-import { QuickDB } from "quick.db";
+import { MySQLDriver, QuickDB } from "quick.db";
 
-export default (client: Client, db: QuickDB): void => {
+export default (client: Client, mysql: MySQLDriver): void => {
   client.on("messageCreate", async (message: Message) => {
+    // Connect to MySQL
+    await mysql.connect();
+    const db = new QuickDB({ driver: mysql });
+
     if (message.channel.type !== 0) return;
     if (message.author.bot) return;
 
