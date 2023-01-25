@@ -74,7 +74,11 @@ export const Confess: SlashCommand = {
       ],
     },
   ],
-  run: async (client, interaction, db) => {
+  run: async (client, interaction, mysql) => {
+    // Connect to MySQL
+    await mysql!.connect();
+    const db = new QuickDB({ driver: mysql });
+
     let message;
 
     const confessions = db.table("confessions");

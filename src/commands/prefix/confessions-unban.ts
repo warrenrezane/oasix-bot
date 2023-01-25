@@ -1,4 +1,5 @@
 import { ApplicationCommandType, EmbedBuilder } from "discord.js";
+import { QuickDB } from "quick.db";
 import { PrefixCommand } from "../../interfaces/PrefixCommand";
 
 export const ConfessionsUnban: PrefixCommand = {
@@ -7,7 +8,11 @@ export const ConfessionsUnban: PrefixCommand = {
   usage: `${(process.env.PREFIX as string) || "?"}confessions-unban [user_id]`,
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],
-  run: async (client, message, db) => {
+  run: async (client, message, mysql) => {
+    // Connect to MySQL
+    await mysql!.connect();
+    const db = new QuickDB({ driver: mysql });
+
     const unbanArguments = message.content.split(/ +/g);
     unbanArguments.shift();
 
