@@ -4,6 +4,7 @@ import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
 import { MySQLDriver } from "quick.db";
+import http from "http";
 
 export const client = new Client({
   intents: [
@@ -37,6 +38,12 @@ const mysql = new MySQLDriver({
 ready(client);
 interactionCreate(client, mysql);
 messageCreate(client, mysql);
+
+http
+  .createServer((request, response) => {
+    response.end();
+  })
+  .listen(8080);
 
 const AuthenticationToken = process.env.TOKEN as string;
 if (!AuthenticationToken) {
