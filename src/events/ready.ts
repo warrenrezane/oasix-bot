@@ -1,10 +1,9 @@
 import { Client, ComponentType, TextChannel } from "discord.js";
-import { QuickDB } from "quick.db";
 import { Commands } from "../containers/Commands";
 
 const date = new Date();
 
-export default (client: Client, db: QuickDB): void => {
+export default (client: Client): void => {
   client.on("ready", async () => {
     if (!client.user || !client.application) return;
 
