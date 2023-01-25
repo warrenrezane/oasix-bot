@@ -5,10 +5,6 @@ import { MySQLDriver, QuickDB } from "quick.db";
 
 export default (client: Client, mysql: MySQLDriver): void => {
   client.on("interactionCreate", async (interaction: Interaction) => {
-    // Connect to MySQL
-    await mysql.connect();
-    const db = new QuickDB({ driver: mysql });
-
     if (interaction.isChatInputCommand()) {
       const slashCommand = SlashCommands.find(
         (command) => command.name === interaction.commandName
@@ -17,7 +13,7 @@ export default (client: Client, mysql: MySQLDriver): void => {
       if (!slashCommand) return;
 
       try {
-        slashCommand.run(client, interaction, db);
+        slashCommand.run(client, interaction, mysql);
       } catch (error) {
         console.error(error);
       }
