@@ -1,9 +1,4 @@
-import {
-  Client,
-  CommandInteraction,
-  Message,
-  MessageApplicationCommandData,
-} from "discord.js";
+import { Client, Message, MessageApplicationCommandData } from "discord.js";
 import { QuickDB } from "quick.db";
 
 export interface PrefixCommand extends MessageApplicationCommandData {
