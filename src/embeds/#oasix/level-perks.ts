@@ -25,7 +25,7 @@ export const LevelPerksEmbed: Embed = {
         <a:blackboost:1049863370330869843> <@&1050971470672703579> **- Can send files & link with attachment**
         <a:blackboost:1049863370330869843> <@&1050971490545303622> **- Custom sticker OR emoji (to be removed after the season ends)**
         <a:blackboost:1049863370330869843> <@&1050971509549715510> **- Additional XP**
-        <a:blackboost:1049863370330869843> <@&1056905844912029766> **- Nitro Boost**
+        <a:blackboost:1049863370330869843> <@&1056905844912029766> **- Nitro Boost for first 10 members**
         <a:blackboost:1049863370330869843> <@&1056905865719980114> **- Exclusive role (OASIX PATRON), Entry to ultimate giveaway**
         `
       )

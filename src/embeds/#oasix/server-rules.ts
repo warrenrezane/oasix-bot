@@ -7,7 +7,7 @@ export const ServerRulesEmbed: Embed = {
   embeds: [
     new EmbedBuilder()
       .setColor("White")
-      .setTitle("**OASIX SERVER RULES**")
+      .setTitle("**Server Rules**")
       .setAuthor({
         name: "Oasix",
         iconURL:
