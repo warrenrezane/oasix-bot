@@ -8,7 +8,7 @@ export const Embeds: PrefixCommand = {
   commandDescription: "Lists all of the available embeds.",
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],
-  run: async (client, message, db) => {
+  run: async (client, message) => {
     let data: string = "";
 
     EmbedsContainer.forEach((e, index) => {

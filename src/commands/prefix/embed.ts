@@ -13,7 +13,7 @@ export const Embed: PrefixCommand = {
   }embed [channel_id] [embed_name]`,
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],
-  run: async (client, message, db) => {
+  run: async (client, message) => {
     const embedArguments = message.content.split(/ +/g);
     embedArguments.shift();
 
