@@ -17,6 +17,6 @@ export default (client: Client): void => {
 
     await client.application.commands.set(Commands);
 
-    console.log(`\n[${date.toUTCString()}] ${client.user.tag} is online!`);
+    console.log(`[${date.toUTCString()}] ${client.user.tag} is online!`);
   });
 };

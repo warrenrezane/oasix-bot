@@ -58,7 +58,7 @@ client.login(AuthenticationToken).catch((err) => {
 
 process.on("unhandledRejection", async (err, promise) => {
   console.error(
-    `[${date.toUTCString()}] [ANTI-CRASH] Unhandled Rejection: ${err}`
+    `\n[${date.toUTCString()}] [ANTI-CRASH] Unhandled Rejection: ${err}`
   );
   console.error(promise);
 });
