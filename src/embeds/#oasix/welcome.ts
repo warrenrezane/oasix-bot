@@ -26,7 +26,7 @@ export const WelcomeEmbed: Embed = {
       .setDescription(
         `**Oasix** is a friendly community server mainly offering to be your new safe haven! 
     Hang out and have fun, or even create friends and memories all in here! Head on to
-    <#1056634604905308240> to verify and get access to the server.
+    <#1065026792781529109> to verify and get access to the server.
     `
       )
       .setTimestamp()
