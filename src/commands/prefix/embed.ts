@@ -10,7 +10,7 @@ export const Embed: PrefixCommand = {
     "?" + "embeds`.",
   usage: `${
     (process.env.PREFIX as string) || "?"
-  }embed [channel_id] [embed_name]`,
+  }embed [channel_id] [...embed_names (separated with "|")]`,
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],
   run: async (client, message) => {
@@ -18,7 +18,7 @@ export const Embed: PrefixCommand = {
     embedArguments.shift();
 
     const channel_id = embedArguments[0];
-    const embed = EmbedsContainer.find((e) => e.name === embedArguments[1]);
+    const embedArray = embedArguments[1].split("|");
 
     const exists = client.channels.cache.find((c) => c.id === channel_id);
 
@@ -27,16 +27,31 @@ export const Embed: PrefixCommand = {
         embeds: [
           new EmbedBuilder()
             .setColor("Red")
-            .setDescription("Sorry, this channel doesn't exist."),
+            .setTitle("Error!")
+            .setDescription("Sorry, this channel does not exist."),
         ],
       });
     } else {
-      (client.channels.cache.get(channel_id) as TextChannel).send({
-        embeds: embed!.embeds,
-        components: "components" in embed! ? embed.components : undefined,
-      });
+      embedArray.forEach(async (data) => {
+        const embed = EmbedsContainer.find((e) => e.name === data);
 
-      message.delete();
+        if (!embed) {
+          await message.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setColor("Red")
+                .setTitle("Error!")
+                .setDescription(`Sorry, ${data} embed does not exist.`),
+            ],
+          });
+        }
+
+        (client.channels.cache.get(channel_id) as TextChannel).send({
+          embeds: embed!.embeds,
+          files: "files" in embed! ? embed.files : undefined,
+          components: "components" in embed! ? embed.components : undefined,
+        });
+      });
     }
   },
 };
