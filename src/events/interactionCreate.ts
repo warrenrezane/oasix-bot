@@ -1,5 +1,10 @@
 import { EmbedsContainer } from "../containers/EmbedsContainer";
-import { Client, CommandInteraction, Interaction } from "discord.js";
+import {
+  Client,
+  CommandInteraction,
+  EmbedBuilder,
+  Interaction,
+} from "discord.js";
 import { SlashCommands } from "../containers/SlashCommands";
 import { MySQLDriver, QuickDB } from "quick.db";
 
@@ -20,13 +25,45 @@ export default (client: Client, mysql: MySQLDriver): void => {
     }
 
     if (interaction.isButton()) {
+      if (interaction.customId.includes("role")) {
+        let selectedRole = interaction.customId.split("-")[1];
+        let guild = client.guilds.cache.get(process.env.GUILD_ID as string);
+        let role = guild?.roles.cache.find((r) => r.id === selectedRole);
+
+        if (typeof role === "undefined") {
+          await interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setColor("Red")
+                .setDescription("❌ Sorry, this role does not exist."),
+            ],
+            ephemeral: true,
+          });
+          return;
+        }
+
+        guild?.members.cache.get(interaction.user.id)?.roles.add(role!.id);
+        await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setColor("Green")
+              .setDescription(
+                `✅ ${role!.name} has been added to your profile.`
+              ),
+          ],
+          ephemeral: true,
+        });
+
+        return;
+      }
+
       const embed = EmbedsContainer.find(
         (e) => e.name === interaction.customId
       );
 
       if (!embed) {
         await interaction.reply({
-          content: "This embed doesn't exist.",
+          content: "❌ This embed doesn't exist.",
         });
 
         return;
