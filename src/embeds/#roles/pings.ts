@@ -27,10 +27,6 @@ export const PingsRoleEmbed: Embed = {
           .setCustomId("role-1052229390739718225")
           .setLabel("Giveaway")
           .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder()
-          .setCustomId("role-1046425313606897694")
-          .setLabel("Arcade")
-          .setStyle(ButtonStyle.Secondary),
       ],
     },
   ],

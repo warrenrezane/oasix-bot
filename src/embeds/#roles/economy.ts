@@ -17,10 +17,13 @@ export const EconomyRoleEmbed: Embed = {
           .setCustomId("role-1055453182601461780")
           .setLabel("Fishing")
           .setStyle(ButtonStyle.Secondary),
-
         new ButtonBuilder()
           .setCustomId("role-1055450395570356297")
           .setLabel("Casino")
+          .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder()
+          .setCustomId("role-1046425313606897694")
+          .setLabel("Arcade")
           .setStyle(ButtonStyle.Secondary),
       ],
     },
