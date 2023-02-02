@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { Client, Partials, GatewayIntentBits } from "discord.js";
+import { Client, Partials, GatewayIntentBits, ActivityType } from "discord.js";
 import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
@@ -24,6 +24,16 @@ export const client = new Client({
     Partials.ThreadMember,
     Partials.User,
   ],
+  presence: {
+    status: "online",
+    activities: [
+      {
+        name: ".gg/oasix",
+        type: ActivityType.Watching,
+        url: "https://discord.gg/oasix",
+      },
+    ],
+  },
 });
 
 const date = new Date();
