@@ -14,6 +14,9 @@ declare global {
       DB_USER: string;
       DB_PASS: string;
       DB_NAME: string;
+      BOT_TESTING_CHANNEL_ID: string;
+      MAIN_CHAT_CHANNEL_ID: string;
+      OASIX_VERIFIED_ROLE: string;
     }
   }
 }
