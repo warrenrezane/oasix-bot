@@ -42,19 +42,39 @@ export default (client: Client, mysql: MySQLDriver): void => {
           return;
         }
 
-        guild?.members.cache.get(interaction.user.id)?.roles.add(role!.id);
-        await interaction.reply({
-          embeds: [
-            new EmbedBuilder()
-              .setColor("Green")
-              .setDescription(
-                `✅ ${role!.name} has been added to your profile.`
-              ),
-          ],
-          ephemeral: true,
-        });
+        if (
+          guild?.members.cache
+            .get(interaction.user.id)
+            ?.roles.cache.some((ExistingRole) => ExistingRole.id === role?.id)
+        ) {
+          await interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setColor("Green")
+                .setDescription(
+                  `🗑️ ${role!.name} has been removed to your profile.`
+                ),
+            ],
+            ephemeral: true,
+          });
 
-        return;
+          return;
+        } else {
+          guild?.members.cache.get(interaction.user.id)?.roles.add(role!.id);
+
+          await interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setColor("Green")
+                .setDescription(
+                  `✅ ${role!.name} has been added to your profile.`
+                ),
+            ],
+            ephemeral: true,
+          });
+
+          return;
+        }
       }
 
       const embed = EmbedsContainer.find(
