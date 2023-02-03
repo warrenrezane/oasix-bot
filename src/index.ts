@@ -11,9 +11,9 @@ import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
 import { MySQLDriver } from "quick.db";
 import http from "http";
-import https from "https";
 import * as schedule from "node-schedule";
 import Time from "./functions/Time";
+import HttpGet from "./functions/HttpGet";
 
 export const client = new Client({
   intents: [
@@ -83,31 +83,23 @@ rule.hour = 9;
 rule.minute = 1;
 rule.tz = "Asia/Manila";
 
-schedule.scheduleJob(rule, function () {
-  https
-    .get("https://api.quotable.io/random?limit=1", (response) => {
-      let data = "";
+schedule.scheduleJob(rule, async function () {
+  try {
+    const quote = await HttpGet("https://api.quotable.io/random?limit=1");
+    const { content, author } = quote;
 
-      response.on("data", (chunk) => {
-        data += chunk;
-      });
-
-      response.on("end", () => {
-        const { content, author } = JSON.parse(data);
-        (
-          client.channels.cache.get(
-            process.env.MAIN_CHAT_CHANNEL_ID as string
-          ) as TextChannel
-        ).send({
-          content: `**QOUTE OF THE DAY:**\n\n*"${content}"*\n- ${author}\n\nGood Morning, <@&${
-            process.env.OASIX_VERIFIED_ROLE as string
-          }>.`,
-        });
-      });
-    })
-    .on("error", (error) => {
-      console.error(error);
+    (
+      client.channels.cache.get(
+        process.env.MAIN_CHAT_CHANNEL_ID as string
+      ) as TextChannel
+    ).send({
+      content: `**QOUTE OF THE DAY:**\n\n*"${content}"*\n- ${author}\n\nGood Morning, <@&${
+        process.env.OASIX_VERIFIED_ROLE as string
+      }>.`,
     });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 process.on("unhandledRejection", async (err, promise) => {
