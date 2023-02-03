@@ -1,7 +1,6 @@
 import { Client } from "discord.js";
 import { Commands } from "../containers/Commands";
-
-const date = new Date();
+import Time from "../functions/Time";
 
 export default (client: Client): void => {
   client.on("ready", async () => {
@@ -9,13 +8,14 @@ export default (client: Client): void => {
 
     Commands.forEach((command) => {
       console.log(
-        `[${date.toUTCString()}]\n[Command: ${command.name
+        `[${Time()}]\n[Command: ${
+          command.name
         }] has been loaded, and is ready to use. \nUsage: ${command.usage}\n`
       );
     });
 
     await client.application.commands.set(Commands);
 
-    console.log(`[${date.toUTCString()}] ${client.user.tag} is online!`);
+    console.log(`[${Time()}]\n${client.user.tag} is online!`);
   });
 };
