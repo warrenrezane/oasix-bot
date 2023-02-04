@@ -17,6 +17,7 @@ declare global {
       BOT_TESTING_CHANNEL_ID: string;
       MAIN_CHAT_CHANNEL_ID: string;
       OASIX_VERIFIED_ROLE: string;
+      SUBSCRIPTION_PLANS_CHANNEL_ID: string;
     }
   }
 }
