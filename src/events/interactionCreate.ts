@@ -47,6 +47,8 @@ export default (client: Client, mysql: MySQLDriver): void => {
             .get(interaction.user.id)
             ?.roles.cache.some((ExistingRole) => ExistingRole.id === role?.id)
         ) {
+          guild?.members.cache.get(interaction.user.id)?.roles.remove(role.id)
+
           await interaction.reply({
             embeds: [
               new EmbedBuilder()

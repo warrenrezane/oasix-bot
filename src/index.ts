@@ -79,8 +79,8 @@ client.login(AuthenticationToken).catch((err) => {
 });
 
 const rule = new schedule.RecurrenceRule();
-rule.hour = 9;
-rule.minute = 1;
+rule.hour = 11;
+rule.minute = 13;
 rule.tz = "Asia/Manila";
 
 schedule.scheduleJob(rule, async function () {

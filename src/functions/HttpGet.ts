@@ -1,8 +1,8 @@
-import http from "http";
+import https from "https";
 
 export default function (url: string) {
   return new Promise<any>((resolve, reject) => {
-    http
+    https
       .get(url, (result) => {
         result.setEncoding("utf-8");
         let body = "";
