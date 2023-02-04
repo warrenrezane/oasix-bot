@@ -8,6 +8,7 @@ export default function (): string {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
+    timeZone: "Asia/Manila",
   };
   return date.toLocaleDateString("en-PH", options);
 }
