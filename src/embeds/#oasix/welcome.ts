@@ -51,6 +51,16 @@ export const WelcomeEmbed: Embed = {
           .setLabel("Level Perks")
           .setStyle(ButtonStyle.Secondary)
           .setEmoji("1049863370330869843"),
+
+        new ButtonBuilder()
+          .setURL(
+            `https://discord.com/channels/${process.env.GUILD_ID as string}/${
+              process.env.SUBSCRIPTION_PLANS_CHANNEL_ID as string
+            }`
+          )
+          .setLabel("Subscription Plans")
+          .setEmoji("1052543755045060628")
+          .setStyle(ButtonStyle.Link),
       ],
     },
   ],
