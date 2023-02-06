@@ -1,12 +1,16 @@
 import { PrefixCommands } from "../containers/PrefixCommands";
-import { Client, EmbedBuilder, Message, PermissionsBitField } from "discord.js";
+import { Client, Message, PermissionsBitField } from "discord.js";
 import { MySQLDriver } from "quick.db";
+import ChatGPT from "../functions/ChatGPT";
 
 export default (client: Client, mysql: MySQLDriver): void => {
   client.on("messageCreate", async (message: Message) => {
-    // Connect to MySQL
     if (message.channel.type !== 0) return;
     if (message.author.bot) return;
+
+    // ChatGPT
+    if (message.channel.id === process.env.CHATGPT_CHANNEL)
+      ChatGPT(message, mysql);
 
     const prefix = process.env.PREFIX || "?";
 
