@@ -9,7 +9,10 @@ export default (client: Client, mysql: MySQLDriver): void => {
     if (message.author.bot) return;
 
     // ChatGPT
-    if (message.channel.id === process.env.CHATGPT_CHANNEL)
+    if (
+      message.channel.id === process.env.CHATGPT_CHANNEL ||
+      message.channel.id === process.env.STAFF_CHATGPT_CHANNEL
+    )
       ChatGPT(message, mysql);
 
     const prefix = process.env.PREFIX || "?";
