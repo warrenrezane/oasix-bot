@@ -10,7 +10,7 @@ export default (client: Client, mysql: MySQLDriver): void => {
 
     // ChatGPT
     if (
-      message.channel.id === process.env.CHATGPT_CHANNEL ||
+      message.channel.id === process.env.PUBLIC_CHATGPT_CHANNEL ||
       message.channel.id === process.env.STAFF_CHATGPT_CHANNEL
     )
       ChatGPT(message, mysql);
