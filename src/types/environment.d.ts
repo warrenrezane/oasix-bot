@@ -18,7 +18,7 @@ declare global {
       MAIN_CHAT_CHANNEL_ID: string;
       OASIX_VERIFIED_ROLE: string;
       SUBSCRIPTION_PLANS_CHANNEL_ID: string;
-      CHATGPT_API_KEY: string;
+      OPENAI_API_KEY: string;
       PUBLIC_CHATGPT_CHANNEL: string;
       STAFF_CHATGPT_CHANNEL: string;
       OASIX_BOT_CHATGPT_ENDPOINT: string;
