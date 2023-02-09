@@ -1,7 +1,7 @@
 import { PrefixCommands } from "../containers/PrefixCommands";
 import { Client, Message, PermissionsBitField } from "discord.js";
 import { MySQLDriver } from "quick.db";
-import ChatGPT from "../functions/ChatGPT";
+import ChatGPTOfficial from "../functions/ChatGPTOfficial";
 
 export default (client: Client, mysql: MySQLDriver): void => {
   client.on("messageCreate", async (message: Message) => {
@@ -13,7 +13,7 @@ export default (client: Client, mysql: MySQLDriver): void => {
       message.channel.id === process.env.PUBLIC_CHATGPT_CHANNEL ||
       message.channel.id === process.env.STAFF_CHATGPT_CHANNEL
     )
-      ChatGPT(message, mysql);
+      ChatGPTOfficial(message);
 
     const prefix = process.env.PREFIX || "?";
 
