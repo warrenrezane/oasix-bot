@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import axios, { AxiosError } from "axios";
 
-export default async function (message: Message): Promise<void> {
+export default async function(message: Message): Promise<void> {
   await message.channel.sendTyping();
 
   const config = {
@@ -13,8 +13,8 @@ export default async function (message: Message): Promise<void> {
   const payload = {
     model: "text-davinci-003",
     max_tokens: 1000,
-    prompt: message.content,
     temperature: 0,
+    prompt: `You are ChatGPT, a large language model trained by OpenAI.\nKnowledge cutoff: 2021-09\nCurrent date: ${new Date().toDateString()}\n${message.author.username}: ${message.content}\nChatGPT: `,
     user: message.author.username,
   };
 

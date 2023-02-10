@@ -42,42 +42,42 @@ export default (client: Client, mysql: MySQLDriver): void => {
           return;
         }
 
-        // if (
-        //   guild?.members.cache
-        //     .get(interaction.user.id)
-        //     ?.roles.cache.some((ExistingRole) => ExistingRole.id === role?.id)
-        // ) {
-        //   guild?.members.cache.get(interaction.user.id)?.roles.remove(role.id)
+        if (
+          guild?.members.cache
+            .get(interaction.user.id)
+            ?.roles.cache.some((ExistingRole) => ExistingRole.id === role?.id)
+        ) {
+          guild?.members.cache.get(interaction.user.id)?.roles.remove(role.id)
 
-        //   await interaction.reply({
-        //     embeds: [
-        //       new EmbedBuilder()
-        //         .setColor("Green")
-        //         .setDescription(
-        //           `🗑️ ${role!.name} has been removed to your profile.`
-        //         ),
-        //     ],
-        //     ephemeral: true,
-        //   });
+          await interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setColor("Green")
+                .setDescription(
+                  `🗑️ ${role!.name} has been removed to your profile.`
+                ),
+            ],
+            ephemeral: true,
+          });
 
-        //   return;
-        // } else {
-        guild?.members.cache.get(interaction.user.id)?.roles.add(role!.id);
+          return;
+        } else {
+          guild?.members.cache.get(interaction.user.id)?.roles.add(role!.id);
 
-        await interaction.reply({
-          embeds: [
-            new EmbedBuilder()
-              .setColor("Green")
-              .setDescription(
-                `✅ ${role!.name} has been added to your profile.`
-              ),
-          ],
-          ephemeral: true,
-        });
+          await interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setColor("Green")
+                .setDescription(
+                  `✅ ${role!.name} has been added to your profile.`
+                ),
+            ],
+            ephemeral: true,
+          });
 
-        return;
+          return;
+        }
       }
-      // }
 
       const embed = EmbedsContainer.find(
         (e) => e.name === interaction.customId
