@@ -93,7 +93,7 @@ schedule.scheduleJob(rule, async function() {
         process.env.MAIN_CHAT_CHANNEL_ID as string
       ) as TextChannel
     ).send({
-      content: `**QOUTE OF THE DAY:**\n\n*"${content}"*\n- ${author}\n\nGood Morning, <@&${process.env.OASIX_VERIFIED_ROLE as string
+      content: `**QOUTE OF THE DAY:**\n\n*"${content}"*\n- ${author}\n\nGood noon, <@&${process.env.OASIX_VERIFIED_ROLE as string
         }>.`,
     });
   } catch (error) {
