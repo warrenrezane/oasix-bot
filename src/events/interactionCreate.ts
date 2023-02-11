@@ -26,18 +26,19 @@ export default (client: Client, mysql: MySQLDriver): void => {
 
     if (interaction.isButton()) {
       if (interaction.customId.includes("role")) {
+        await interaction.deferReply({ ephemeral: true });
+
         let selectedRole = interaction.customId.split("-")[1];
         let guild = client.guilds.cache.get(process.env.GUILD_ID as string);
         let role = guild?.roles.cache.find((r) => r.id === selectedRole);
 
         if (typeof role === "undefined") {
-          await interaction.reply({
+          await interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setColor("Red")
                 .setDescription("❌ Sorry, this role does not exist."),
             ],
-            ephemeral: true,
           });
           return;
         }
@@ -47,9 +48,9 @@ export default (client: Client, mysql: MySQLDriver): void => {
             .get(interaction.user.id)
             ?.roles.cache.some((ExistingRole) => ExistingRole.id === role?.id)
         ) {
-          guild?.members.cache.get(interaction.user.id)?.roles.remove(role.id)
+          guild?.members.cache.get(interaction.user.id)?.roles.remove(role.id);
 
-          await interaction.reply({
+          await interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setColor("Green")
@@ -57,14 +58,13 @@ export default (client: Client, mysql: MySQLDriver): void => {
                   `🗑️ ${role!.name} has been removed to your profile.`
                 ),
             ],
-            ephemeral: true,
           });
 
           return;
         } else {
           guild?.members.cache.get(interaction.user.id)?.roles.add(role!.id);
 
-          await interaction.reply({
+          await interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setColor("Green")
@@ -72,7 +72,6 @@ export default (client: Client, mysql: MySQLDriver): void => {
                   `✅ ${role!.name} has been added to your profile.`
                 ),
             ],
-            ephemeral: true,
           });
 
           return;
