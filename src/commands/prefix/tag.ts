@@ -24,6 +24,18 @@ export const Tag: PrefixCommand = {
 
       switch (subcommand) {
         case "create":
+          if (tag_arguments[1].match(/[^a-zA-Z0-9]/)) {
+            return message.channel.send({
+              embeds: [
+                new EmbedBuilder()
+                  .setColor(0xb33a3a)
+                  .setDescription(
+                    "❌ Tag aliases can't have special characters"
+                  ),
+              ],
+            });
+          }
+
           // Check array length (should be 3, [index_1 = tag_name, index_2 = content])
           if (tag_arguments.length < 3) {
             return message.channel.send({
