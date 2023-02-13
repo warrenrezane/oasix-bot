@@ -5,7 +5,7 @@ import ChatGPTOfficial from "../functions/ChatGPTOfficial";
 
 export default (client: Client, mysql: MySQLDriver): void => {
   client.on("messageCreate", async (message: Message) => {
-    if (message.channel.type !== 0) return;
+    if (message.channel.type === 1) return;
     if (message.author.bot) return;
 
     // ChatGPT
