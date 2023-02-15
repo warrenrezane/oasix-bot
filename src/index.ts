@@ -3,7 +3,7 @@ import { Client, Partials, GatewayIntentBits, ActivityType } from "discord.js";
 import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
-import { MySQLDriver } from "quick.db";
+import { QuickDB } from "quick.db";
 import http from "http";
 import Time from "./functions/Time";
 import DailyQuotes from "./functions/scheduled/DailyQuotes";
@@ -38,16 +38,9 @@ export const client = new Client({
   },
 });
 
-const mysql = new MySQLDriver({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-});
-
 ready(client);
-interactionCreate(client, mysql);
-messageCreate(client, mysql);
+interactionCreate(client);
+messageCreate(client);
 
 http
   .createServer((request, response) => {

@@ -74,10 +74,9 @@ export const Confess: SlashCommand = {
       ],
     },
   ],
-  run: async (client, interaction, mysql) => {
-    // Connect to MySQL
-    await mysql!.connect();
-    const db = new QuickDB({ driver: mysql });
+  run: async (client, interaction) => {
+    // Connect to QuickDB
+    const db = new QuickDB({ filePath: "oasix.sqlite" });
 
     let message;
 

@@ -8,10 +8,9 @@ export const ConfessionsBan: PrefixCommand = {
   usage: `${(process.env.PREFIX as string) || "?"}confessions-ban [user_id]`,
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],
-  run: async (client, message, mysql) => {
-    // Connect to MySQL
-    await mysql!.connect();
-    const db = new QuickDB({ driver: mysql });
+  run: async (client, message) => {
+    // Connect to QuickDB
+    const db = new QuickDB({ filePath: "oasix.sqlite" });
 
     const banArguments = message.content.split(/ +/g);
     banArguments.shift();

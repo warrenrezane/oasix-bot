@@ -1,5 +1,6 @@
 import { EmbedBuilder } from "@discordjs/builders";
 import { ApplicationCommandType } from "discord.js";
+import path from "path";
 import { QuickDB } from "quick.db";
 import { PrefixCommand } from "../../interfaces/PrefixCommand";
 
@@ -11,9 +12,9 @@ export const Tag: PrefixCommand = {
   usage: `${process.env.PREFIX as string}tag ...[subcommand]`,
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["SendMessages"],
-  run: async (client, message, mysql) => {
-    await mysql!.connect();
-    const db = new QuickDB({ driver: mysql });
+  run: async (client, message) => {
+    // Connect to QuickDB
+    const db = new QuickDB({ filePath: "oasix.sqlite" });
     const tags = db.table("tags");
 
     const tag_arguments = message.content.split(/ +/g);
