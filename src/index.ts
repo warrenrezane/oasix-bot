@@ -3,7 +3,6 @@ import { Client, Partials, GatewayIntentBits, ActivityType } from "discord.js";
 import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
-import { QuickDB } from "quick.db";
 // import http from "http";
 import Time from "./functions/Time";
 import DailyQuotes from "./functions/scheduled/DailyQuotes";
