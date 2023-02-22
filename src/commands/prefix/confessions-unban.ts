@@ -8,10 +8,9 @@ export const ConfessionsUnban: PrefixCommand = {
   usage: `${(process.env.PREFIX as string) || "?"}confessions-unban [user_id]`,
   type: ApplicationCommandType.Message,
   defaultMemberPermissions: ["Administrator"],
-  run: async (client, message, mysql) => {
-    // Connect to MySQL
-    await mysql!.connect();
-    const db = new QuickDB({ driver: mysql });
+  run: async (client, message) => {
+    // Connect to QuickDB
+    const db = new QuickDB({ filePath: "oasix.sqlite" });
 
     const unbanArguments = message.content.split(/ +/g);
     unbanArguments.shift();

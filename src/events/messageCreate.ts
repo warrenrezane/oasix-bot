@@ -1,9 +1,8 @@
 import { PrefixCommands } from "../containers/PrefixCommands";
 import { Client, Message, PermissionsBitField } from "discord.js";
-import { MySQLDriver } from "quick.db";
 import ChatGPTOfficial from "../functions/ChatGPTOfficial";
 
-export default (client: Client, mysql: MySQLDriver): void => {
+export default (client: Client): void => {
   client.on("messageCreate", async (message: Message) => {
     if (message.channel.type === 1) return;
     if (message.author.bot) return;
@@ -46,7 +45,7 @@ export default (client: Client, mysql: MySQLDriver): void => {
       }
 
       try {
-        prefixCommand?.run(client, message, mysql);
+        prefixCommand?.run(client, message);
       } catch (error) {
         console.error(error);
       }

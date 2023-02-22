@@ -1,14 +1,8 @@
 import { EmbedsContainer } from "../containers/EmbedsContainer";
-import {
-  Client,
-  CommandInteraction,
-  EmbedBuilder,
-  Interaction,
-} from "discord.js";
+import { Client, EmbedBuilder, Interaction } from "discord.js";
 import { SlashCommands } from "../containers/SlashCommands";
-import { MySQLDriver, QuickDB } from "quick.db";
 
-export default (client: Client, mysql: MySQLDriver): void => {
+export default (client: Client): void => {
   client.on("interactionCreate", async (interaction: Interaction) => {
     if (interaction.isChatInputCommand()) {
       const slashCommand = SlashCommands.find(
@@ -18,7 +12,7 @@ export default (client: Client, mysql: MySQLDriver): void => {
       if (!slashCommand) return;
 
       try {
-        slashCommand.run(client, interaction, mysql);
+        slashCommand.run(client, interaction);
       } catch (error) {
         console.error(error);
       }
