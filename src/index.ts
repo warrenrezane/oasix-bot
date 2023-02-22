@@ -7,6 +7,7 @@ import { MySQLDriver } from "quick.db";
 import http from "http";
 import Time from "./functions/Time";
 import DailyQuotes from "./functions/scheduled/DailyQuotes";
+import LoadCommands from "./functions/LoadCommands";
 
 export const client = new Client({
   intents: [
@@ -44,6 +45,8 @@ const mysql = new MySQLDriver({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
 });
+
+LoadCommands(client);
 
 ready(client);
 interactionCreate(client, mysql);
