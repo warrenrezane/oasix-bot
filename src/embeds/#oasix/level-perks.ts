@@ -15,7 +15,7 @@ export const LevelPerksEmbed: Embed = {
       .setDescription(
         `You will earn points known as XP whenever you participate in any activity within the server, whether it be through text or voice channels. The more points you earn, the higher level you achieve, and each level grants you access to a new set of perks that you may take advantage of while participating on the server.
         
-        <a:blackboost:1073655993713573949> <@&1073655993713573949> **- 10,000 Casino Role income (every 3 days); Fishing**
+        <a:blackboost:1049863370330869843> <@&1073655993713573949> **- 10,000 Casino Role income (every 3 days); Fishing**
         <a:blackboost:1049863370330869843> <@&1050840021546057799> **- Can add reaction**
         <a:blackboost:1049863370330869843> <@&1050840018442268733> **- Can use external emoji**
         <a:blackboost:1049863370330869843> <@&1050840014260551780> **- Can access nickname**
