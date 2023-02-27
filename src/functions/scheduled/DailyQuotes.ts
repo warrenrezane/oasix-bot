@@ -18,7 +18,7 @@ export default async function DailyQuotes(client: Client) {
           process.env.MAIN_CHAT_CHANNEL_ID as string
         ) as TextChannel
       ).send({
-        content: `**QOUTE OF THE DAY:**\n\n*"${content}"*\n- ${author}\n\nGood morning, <@&${
+        content: `**QUOTE OF THE DAY:**\n\n*"${content}"*\n- ${author}\n\nGood morning, <@&${
           process.env.OASIX_VERIFIED_ROLE as string
         }>.`,
       });
