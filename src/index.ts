@@ -3,10 +3,10 @@ import { Client, Partials, GatewayIntentBits, ActivityType } from "discord.js";
 import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
-import { QuickDB } from "quick.db";
-import http from "http";
+// import http from "http";
 import Time from "./functions/Time";
 import DailyQuotes from "./functions/scheduled/DailyQuotes";
+import LoadCommands from "./functions/LoadCommands";
 
 export const client = new Client({
   intents: [
@@ -38,15 +38,17 @@ export const client = new Client({
   },
 });
 
+LoadCommands(client);
+
 ready(client);
 interactionCreate(client);
 messageCreate(client);
 
-http
-  .createServer((request, response) => {
-    response.end();
-  })
-  .listen(8080);
+// http
+//   .createServer((request, response) => {
+//     response.end();
+//   })
+//   .listen(8080);
 
 const AuthenticationToken = process.env.TOKEN as string;
 if (!AuthenticationToken) {

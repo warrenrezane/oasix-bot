@@ -46,7 +46,7 @@ export const Tag: PrefixCommand = {
                   .setDescription(
                     (("❌ Missing `alias` or `content`.\nCommand usage: `" +
                       process.env.PREFIX) as string) +
-                      "tag create <alias> <content>`"
+                    "tag create <alias> <content>`"
                   ),
               ],
             });
@@ -75,8 +75,8 @@ export const Tag: PrefixCommand = {
                 .setColor(0x00ff00)
                 .setDescription(
                   "✅ Tag `" +
-                    tag_arguments[1] +
-                    "` has been successfully created."
+                  tag_arguments[1] +
+                  "` has been successfully created."
                 ),
             ],
           });
@@ -125,17 +125,17 @@ export const Tag: PrefixCommand = {
           }
 
           // Check if tag creator is same with the message author's ID
-          if (res.createdBy !== message.author.id) {
-            return message.channel.send({
-              embeds: [
-                new EmbedBuilder()
-                  .setColor(0xb33a3a)
-                  .setDescription(
-                    "❌ You don't own this tag, so you cannot delete it."
-                  ),
-              ],
-            });
-          }
+          // if (res.createdBy !== message.author.id) {
+          //   return message.channel.send({
+          //     embeds: [
+          //       new EmbedBuilder()
+          //         .setColor(0xb33a3a)
+          //         .setDescription(
+          //           "❌ You don't own this tag, so you cannot delete it."
+          //         ),
+          //     ],
+          //   });
+          // }
 
           // Delete the tag
           await tags.delete(tag_arguments[1]);
@@ -145,8 +145,8 @@ export const Tag: PrefixCommand = {
                 .setColor(0x00ff00)
                 .setDescription(
                   "🗑️ Tag `" +
-                    tag_arguments[1] +
-                    "` has been successfully deleted."
+                  tag_arguments[1] +
+                  "` has been successfully deleted."
                 ),
             ],
           });
@@ -160,16 +160,16 @@ export const Tag: PrefixCommand = {
                 .setDescription(
                   `__**Get a tag**__
 							Command: ` +
-                    "`?tag <alias>`" +
-                    `\n
+                  "`?tag <alias>`" +
+                  `\n
 							__**Create a new tag**__
 							Command: ` +
-                    "`?tag create <alias> <content>`" +
-                    `\n
+                  "`?tag create <alias> <content>`" +
+                  `\n
               __**Show command guides**__
 							Command: ` +
-                    "`?tag guides`" +
-                    `\n
+                  "`?tag guides`" +
+                  `\n
 							`
                 )
                 .setTimestamp(),
@@ -188,16 +188,16 @@ export const Tag: PrefixCommand = {
             .setDescription(
               `__**Get a tag**__
 							Command: ` +
-                "`?tag <alias>`" +
-                `\n
+              "`?tag <alias>`" +
+              `\n
 							__**Create a new tag**__
 							Command: ` +
-                "`?tag create <alias> <content>`" +
-                `\n
+              "`?tag create <alias> <content>`" +
+              `\n
               __**Show command guides**__
               Command: ` +
-                "`?tag guides`" +
-                `\n
+              "`?tag guides`" +
+              `\n
 							`
             )
             .setTimestamp(),
