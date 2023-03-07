@@ -1,7 +1,8 @@
 import { Message } from "discord.js";
 import axios, { AxiosError } from "axios";
+import fs from "fs";
 
-export default async function (message: Message): Promise<void> {
+export default async function(message: Message): Promise<void> {
   await message.channel.sendTyping();
 
   const config = {
@@ -13,6 +14,7 @@ export default async function (message: Message): Promise<void> {
   const payload = {
     prompt: message.content,
     size: "1024x1024",
+    response_format: "b64_json",
     user: message.author.username,
   };
 
@@ -23,17 +25,32 @@ export default async function (message: Message): Promise<void> {
       config
     );
 
+    const base64Data = data.data[0].b64_json;
+    fs.writeFile(`src/temp/${message.author.id}-${data.created}.png`, base64Data, { encoding: 'base64' }, function(err) {
+      if (err) {
+        console.log(err);
+      }
+    });
+
     await message.channel.send({
-      content: `<@${message.member?.user.id}> ${data.choices[0].text}`,
+      content: `<@${message.member?.user.id}>`,
       files: [
         {
-          attachment: data.data.url[0],
+          attachment: `src/temp/${message.author.id}-${data.created}.png`,
         },
       ],
     });
 
+    fs.unlink(`src/temp/${message.author.id}-${data.created}.png`, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
     return;
   } catch (error) {
+    console.log(error);
+
     await message.channel.send({
       content: `<@${message.author.id}> I'm very sorry, I can't answer your question right now. I'm a little bit busy. Could you please ask it again later? Thank you!`,
     });
