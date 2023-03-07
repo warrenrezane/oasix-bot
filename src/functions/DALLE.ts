@@ -13,7 +13,7 @@ export default async function(message: Message): Promise<void> {
 
   const payload = {
     prompt: message.content,
-    size: "1024x1024",
+    size: "512x512",
     response_format: "b64_json",
     user: message.author.username,
   };
@@ -39,12 +39,6 @@ export default async function(message: Message): Promise<void> {
           attachment: `src/temp/${message.author.id}-${data.created}.png`,
         },
       ],
-    });
-
-    fs.unlink(`src/temp/${message.author.id}-${data.created}.png`, (err) => {
-      if (err) {
-        console.log(err);
-      }
     });
 
     return;
