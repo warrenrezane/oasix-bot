@@ -15,7 +15,8 @@ export default (client: Client): void => {
     )
       ChatGPTOfficial(message);
 
-    if (message.channel.id === process.env.DALL_E_CHANNEL) DALLE(message);
+    // DALL-E
+    // if (message.channel.id === process.env.DALL_E_CHANNEL) DALLE(message);
 
     const prefix = process.env.PREFIX || "?";
 
