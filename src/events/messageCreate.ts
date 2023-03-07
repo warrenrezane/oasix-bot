@@ -1,6 +1,7 @@
 import { PrefixCommands } from "../containers/PrefixCommands";
 import { Client, Message, PermissionsBitField } from "discord.js";
 import ChatGPTOfficial from "../functions/ChatGPTOfficial";
+import DALLE from "../functions/DALLE";
 
 export default (client: Client): void => {
   client.on("messageCreate", async (message: Message) => {
@@ -13,6 +14,8 @@ export default (client: Client): void => {
       message.channel.id === process.env.STAFF_CHATGPT_CHANNEL
     )
       ChatGPTOfficial(message);
+
+    if (message.channel.id === process.env.DALL_E_CHANNEL) DALLE(message);
 
     const prefix = process.env.PREFIX || "?";
 

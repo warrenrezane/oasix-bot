@@ -22,6 +22,7 @@ declare global {
       PUBLIC_CHATGPT_CHANNEL: string;
       STAFF_CHATGPT_CHANNEL: string;
       OASIX_BOT_CHATGPT_ENDPOINT: string;
+      DALL_E_CHANNEL: string;
     }
   }
 }
