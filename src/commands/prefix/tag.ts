@@ -4,14 +4,14 @@ import path from "path";
 import { QuickDB } from "quick.db";
 import { PrefixCommand } from "../../interfaces/PrefixCommand";
 
-const subcommands = ["create", "delete", "guides"];
+const subcommands = ["create", "delete", "guides", "flush"];
 
 export const Tag: PrefixCommand = {
   name: "tag",
   commandDescription: "This command allows to create, edit, or delete tags.",
   usage: `${process.env.PREFIX as string}tag ...[subcommand]`,
   type: ApplicationCommandType.Message,
-  defaultMemberPermissions: ["SendMessages"],
+  defaultMemberPermissions: ["ModerateMembers"],
   run: async (client, message) => {
     // Connect to QuickDB
     const db = new QuickDB({ filePath: "oasix.sqlite" });
@@ -173,6 +173,29 @@ export const Tag: PrefixCommand = {
 							`
                 )
                 .setTimestamp(),
+            ],
+          });
+
+        case "flush":
+          if (!message.member?.roles.cache.some(role => role.name === "STAFF")) {
+            return message.channel.send({
+              embeds: [
+                new EmbedBuilder()
+                  .setColor(0xb33a3a)
+                  .setDescription("❌ You have no rights to use this command."),
+              ],
+            });
+          }
+
+          await tags.deleteAll();
+
+          return message.channel.send({
+            embeds: [
+              new EmbedBuilder()
+                .setColor(0x00ff00)
+                .setDescription(
+                  "🗑️ All tags has been succesfully flushed."
+                ),
             ],
           });
       }

@@ -9,7 +9,7 @@ export const Tags: PrefixCommand = {
   commandDescription: "Show all available tags.",
   usage: `${process.env.PREFIX as string}tags`,
   type: ApplicationCommandType.Message,
-  defaultMemberPermissions: ["SendMessages"],
+  defaultMemberPermissions: ["ModerateMembers"],
   run: async (client, message) => {
     // Connect to QuickDB
     const db = new QuickDB({ filePath: "oasix.sqlite" });
