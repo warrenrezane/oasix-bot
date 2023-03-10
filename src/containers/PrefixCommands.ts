@@ -11,6 +11,6 @@ export const PrefixCommands: PrefixCommand[] = [
   // ConfessionsUnban,
   Embed,
   Embeds,
-  Tag,
-  Tags,
+  // Tag,
+  // Tags,
 ];
