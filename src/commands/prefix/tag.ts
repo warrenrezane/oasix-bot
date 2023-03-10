@@ -4,7 +4,7 @@ import path from "path";
 import { QuickDB } from "quick.db";
 import { PrefixCommand } from "../../interfaces/PrefixCommand";
 
-const subcommands = ["create", "delete", "guides", "flush"];
+const subcommands = ["create", "delete", "guides"];
 
 export const Tag: PrefixCommand = {
   name: "tag",
@@ -46,7 +46,7 @@ export const Tag: PrefixCommand = {
                   .setDescription(
                     (("❌ Missing `alias` or `content`.\nCommand usage: `" +
                       process.env.PREFIX) as string) +
-                    "tag create <alias> <content>`"
+                      "tag create <alias> <content>`"
                   ),
               ],
             });
@@ -75,8 +75,8 @@ export const Tag: PrefixCommand = {
                 .setColor(0x00ff00)
                 .setDescription(
                   "✅ Tag `" +
-                  tag_arguments[1] +
-                  "` has been successfully created."
+                    tag_arguments[1] +
+                    "` has been successfully created."
                 ),
             ],
           });
@@ -145,8 +145,8 @@ export const Tag: PrefixCommand = {
                 .setColor(0x00ff00)
                 .setDescription(
                   "🗑️ Tag `" +
-                  tag_arguments[1] +
-                  "` has been successfully deleted."
+                    tag_arguments[1] +
+                    "` has been successfully deleted."
                 ),
             ],
           });
@@ -160,16 +160,16 @@ export const Tag: PrefixCommand = {
                 .setDescription(
                   `__**Get a tag**__
 							Command: ` +
-                  "`?tag <alias>`" +
-                  `\n
+                    "`?tag <alias>`" +
+                    `\n
 							__**Create a new tag**__
 							Command: ` +
-                  "`?tag create <alias> <content>`" +
-                  `\n
+                    "`?tag create <alias> <content>`" +
+                    `\n
               __**Show command guides**__
 							Command: ` +
-                  "`?tag guides`" +
-                  `\n
+                    "`?tag guides`" +
+                    `\n
 							`
                 )
                 .setTimestamp(),
@@ -177,7 +177,9 @@ export const Tag: PrefixCommand = {
           });
 
         case "flush":
-          if (!message.member?.roles.cache.some(role => role.name === "STAFF")) {
+          if (
+            !message.member?.roles.cache.some((role) => role.name === "STAFF")
+          ) {
             return message.channel.send({
               embeds: [
                 new EmbedBuilder()
@@ -193,9 +195,7 @@ export const Tag: PrefixCommand = {
             embeds: [
               new EmbedBuilder()
                 .setColor(0x00ff00)
-                .setDescription(
-                  "🗑️ All tags has been succesfully flushed."
-                ),
+                .setDescription("🗑️ All tags has been succesfully flushed."),
             ],
           });
       }
@@ -211,16 +211,16 @@ export const Tag: PrefixCommand = {
             .setDescription(
               `__**Get a tag**__
 							Command: ` +
-              "`?tag <alias>`" +
-              `\n
+                "`?tag <alias>`" +
+                `\n
 							__**Create a new tag**__
 							Command: ` +
-              "`?tag create <alias> <content>`" +
-              `\n
+                "`?tag create <alias> <content>`" +
+                `\n
               __**Show command guides**__
               Command: ` +
-              "`?tag guides`" +
-              `\n
+                "`?tag guides`" +
+                `\n
 							`
             )
             .setTimestamp(),
